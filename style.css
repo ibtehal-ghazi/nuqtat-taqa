@@ -1,4 +1,4 @@
-/* style.css - ملف التصميم النهائي المحسن */
+/* style.css - ملف التصميم النهائي المحسن مع التعديلات */
 :root {
     --primary-color: #4a6cf7;
     --secondary-color: #6a11cb;
@@ -266,6 +266,19 @@ body {
 .btn-secondary:hover {
     background-color: var(--white);
     color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -759,8 +772,6 @@ section {
     }
 }
 
-/* باقي الأقسام تبقى كما هي مع تعديلات بسيطة للاستجابة */
-
 /* قسم الفيديوهات */
 .videos-section {
     background-color: var(--light-color);
@@ -1018,50 +1029,843 @@ section {
     color: var(--text-light);
 }
 
-/* الأقسام المؤقتة */
-.summaries-section,
-.tests-section {
+/* قسم الملخصات */
+.summaries-section {
     background-color: var(--light-color);
+    padding: 80px 0;
 }
 
-.placeholder-content {
+.summaries-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.summary-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 40px 30px;
     text-align: center;
-    padding: 60px 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.summary-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.summary-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.summary-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.summary-card p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.summary-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.summary-actions .btn {
+    min-width: 120px;
+}
+
+/* قسم الاختبارات */
+.tests-section {
+    background-color: var(--light-color);
+    padding: 80px 0;
+}
+
+.tests-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+}
+
+.test-tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.test-tab-btn.active {
+    color: var(--primary-color);
+}
+
+.test-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.test-tab-btn:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.test-topic-content {
+    display: none;
+}
+
+.test-topic-content.active {
+    display: block;
+}
+
+.test-info {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
     background-color: var(--white);
     border-radius: 10px;
     box-shadow: var(--shadow);
 }
 
-.placeholder-icon {
-    font-size: 4rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.placeholder-content h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+.test-info h3 {
     color: var(--dark-color);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
 }
 
-.placeholder-content p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
+.test-info p {
     color: var(--text-light);
+    font-size: 1.1rem;
 }
 
-.btn-outline {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+.questions-container {
+    margin-bottom: 40px;
+}
+
+.question-page {
+    display: none;
+}
+
+.question-page.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
     transition: var(--transition);
 }
 
-.btn-outline:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--light-color);
+}
+
+.question-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.question-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: rgba(74, 108, 247, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.question-score {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    color: var(--text-light);
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.question-score.correct {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.question-score.incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.question-image {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.question-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+/* تعديل تصميم خيارات الإجابة لتكون في صف واحد على الشاشات الكبيرة */
+.question-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+    .question-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .question-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+.option-btn {
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-btn:hover:not(.disabled) {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.option-btn.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(74, 108, 247, 0.05);
+}
+
+.option-btn.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.option-btn.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.option-label {
+    font-weight: bold;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    border-radius: 50%;
+    font-size: 0.9rem;
+}
+
+.option-btn.correct .option-label {
+    background-color: #155724;
+    color: white;
+}
+
+.option-btn.incorrect .option-label {
+    background-color: #721c24;
+    color: white;
+}
+
+.explanation {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-right: 4px solid var(--primary-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}
+
+.explanation.show {
+    display: block;
+}
+
+.explanation img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.test-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.page-info {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.page-score {
+    text-align: center;
+    padding: 12px 20px;
+    margin: 15px 0;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    font-weight: 600;
+    color: var(--dark-color);
+    border: 2px solid var(--primary-color);
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+}
+
+/* نتائج الاختبار */
+.test-results {
+    display: none;
+    text-align: center;
+    padding: 50px 30px;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 40px;
+    animation: fadeIn 0.8s ease;
+}
+
+.test-results.show {
+    display: block;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary-color) 0%, #e9ecef 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    position: relative;
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+.score-percent {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    position: relative;
+    z-index: 1;
+}
+
+.score-text {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.correct-answers {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.total-questions {
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+.results-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* قسم التواصل - التصميم المحسن */
+.contact-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    color: var(--white);
+}
+
+.contact-section .physics-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.contact-section .floating-atom {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: floatAtom 20s infinite linear;
+}
+
+.contact-section .atom-1 {
+    width: 80px;
+    height: 80px;
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.contact-section .atom-2 {
+    width: 120px;
+    height: 120px;
+    top: 65%;
+    left: 85%;
+    animation-delay: 5s;
+}
+
+.contact-section .atom-3 {
+    width: 60px;
+    height: 60px;
+    top: 85%;
+    left: 15%;
+    animation-delay: 10s;
+}
+
+.contact-section .energy-wave {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: wave 15s infinite linear;
+}
+
+.contact-section .wave-1 {
+    width: 150px;
+    height: 150px;
+    top: 25%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.contact-section .wave-2 {
+    width: 200px;
+    height: 200px;
+    top: 55%;
+    left: 65%;
+    animation-delay: 7s;
+}
+
+.contact-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.teacher-info {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.teacher-info:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.teacher-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+    position: relative;
+    display: inline-block;
+}
+
+.teacher-details h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-color), #ffd166);
+    border-radius: 2px;
+}
+
+.teacher-details p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.contact-methods-container {
+    flex: 2;
+    min-width: 300px;
+}
+
+.contact-methods-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--white);
+    position: relative;
+}
+
+.contact-methods-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-color), #ffd166);
+    border-radius: 2px;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-height: 140px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.contact-card:hover::before {
+    left: 100%;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.contact-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-color), #ffd166);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-card:hover .contact-icon {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact-text {
+    font-size: 0.95rem;
+    color: var(--white);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.contact-card:hover .contact-text {
+    color: #ffd166;
+}
+
+/* تأثيرات خاصة لكل وسيلة تواصل */
+.contact-card:nth-child(1):hover .contact-icon {
+    background: linear-gradient(135deg, #ea4335, #ff6b6b);
+}
+
+.contact-card:nth-child(2):hover .contact-icon {
+    background: linear-gradient(135deg, #34a853, #4cd964);
+}
+
+.contact-card:nth-child(3):hover .contact-icon {
+    background: linear-gradient(135deg, #1877f2, #4a6cf7);
+}
+
+.contact-card:nth-child(4):hover .contact-icon {
+    background: linear-gradient(135deg, #fffc00, #ffd700);
+}
+
+.contact-card:nth-child(5):hover .contact-icon {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.contact-card:nth-child(6):hover .contact-icon {
+    background: linear-gradient(135deg, #ff0000, #ff6b6b);
+}
+
+.contact-card:nth-child(7):hover .contact-icon {
+    background: linear-gradient(135deg, #e4405f, #ff6b9d);
+}
+
+/* للشاشات المتوسطة */
+@media (max-width: 992px) {
+    .contact-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .teacher-info {
+        min-width: 100%;
+    }
+
+    .contact-methods-container {
+        min-width: 100%;
+    }
+
+    .contact-methods {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .teacher-info {
+        padding: 25px 20px;
+    }
+
+    .teacher-details h3 {
+        font-size: 1.3rem;
+    }
+
+    .teacher-details p {
+        font-size: 0.9rem;
+    }
+
+    .contact-methods {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .contact-card {
+        padding: 20px 15px;
+        min-height: 130px;
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .contact-text {
+        font-size: 0.85rem;
+    }
+
+    .contact-methods-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        padding: 20px;
+        min-height: 120px;
+    }
+
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .contact-text {
+        font-size: 0.8rem;
+    }
+
+    .teacher-info {
+        padding: 20px 15px;
+    }
 }
 
 /* الفوتر */
@@ -1099,6 +1903,39 @@ section {
 .footer-info p {
     margin-bottom: 5px;
     opacity: 0.8;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.footer-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-logo {
+        margin-bottom: 0;
+    }
 }
 
 /* نافذة الفيديو المنبثقة */
@@ -1234,6 +2071,128 @@ section {
     transform: translateY(-2px);
 }
 
+/* تصميم نافذة PDF المحسنة */
+.pdf-modal-content {
+    max-width: 950px;
+    width: 95%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.4s ease;
+}
+
+.pdf-header {
+    padding: 20px 25px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.pdf-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filename {
+    font-weight: bold;
+    color: #ffd166;
+}
+
+.pdf-viewer {
+    flex: 1;
+    padding: 0;
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-viewer-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+}
+
+.pdf-object {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.pdf-fallback {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    background: #fff;
+    border-radius: 12px;
+    margin: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fallback-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 5px;
+}
+
+.fallback-link:hover {
+    text-decoration: underline;
+}
+
+.pdf-actions {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 15px;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .pdf-modal-content {
+        width: 98%;
+        max-height: 95vh;
+    }
+
+    .pdf-object {
+        height: 65vh;
+    }
+
+    .pdf-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pdf-actions .btn {
+        width: 100%;
+    }
+
+    .pdf-header h3 {
+        font-size: 1.1rem;
+    }
+}
+
 /* التجاوب مع الشاشات الصغيرة */
 @media (max-width: 992px) {
     .hero-content {
@@ -1264,6 +2223,98 @@ section {
 
     .video-actions {
         flex-direction: column;
+    }
+
+    .summaries-content {
+        grid-template-columns: 1fr;
+    }
+
+    .teacher-info {
+        flex-direction: column;
+    }
+
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تحسينات للكمبيوتر */
+@media (min-width: 769px) {
+    .question-image img {
+        max-width: 70%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* تحسين أزرار التبويب */
+    .test-tab-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 25px;
+        margin: 0 8px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .test-tab-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        transition: all 0.4s ease;
+        z-index: -1;
+    }
+
+    .test-tab-btn.active {
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(74, 108, 247, 0.3);
+    }
+
+    .test-tab-btn.active::before {
+        left: 0;
+    }
+
+    .test-tab-btn:hover:not(.active) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .page-score {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        margin: 20px auto;
+        text-align: center;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        max-width: 300px;
+        animation: bounceIn 0.6s ease;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -1339,6 +2390,80 @@ section {
         width: 100%;
         text-align: center;
     }
+
+    .tests-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .test-tab-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .test-navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .summary-actions {
+        flex-direction: column;
+    }
+
+    .summary-actions .btn {
+        width: 100%;
+    }
+
+    .results-actions {
+        flex-direction: column;
+    }
+
+    .results-actions .btn {
+        width: 100%;
+    }
+
+    .question-image img {
+        max-width: 100%;
+    }
+
+    .question-score {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        margin-top: 10px;
+    }
+
+    .page-score {
+        margin: 15px 0;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .teacher-details h3 {
+        font-size: 1.5rem;
+    }
+
+    .teacher-details p {
+        font-size: 1rem;
+    }
+
+    .pdf-modal-content {
+        width: 98%;
+        max-height: 95vh;
+    }
+
+    .pdf-viewer {
+        min-height: 400px;
+        max-height: 500px;
+    }
+
+    .pdf-actions {
+        flex-direction: column;
+    }
+
+    .pdf-actions .btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1367,4 +2492,200 @@ section {
     .physics-icon {
         font-size: 3.5rem;
     }
+
+    .question-card {
+        padding: 20px 15px;
+    }
+
+    .option-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+
+    .summary-card {
+        padding: 30px 20px;
+    }
+
+    .teacher-animation {
+        width: 150px;
+        height: 150px;
+    }
+
+    .teacher-icon {
+        font-size: 3.5rem;
+    }
+
+    .contact-card {
+        padding: 20px 15px;
+    }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* تحسينات إضافية للكمبيوتر */
+@media (min-width: 1200px) {
+    .question-image img {
+        max-width: 60%;
+    }
+}
+
+/* رسالة اختيار الموضوع */
+.no-topic-message {
+    display: none;
+    text-align: center;
+    padding: 60px 30px;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+    animation: fadeIn 0.8s ease;
+}
+
+.no-topic-message .message-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.no-topic-message i {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.no-topic-message h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.no-topic-message p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* تحسين عرض أزرار التبويب عندما لا يكون هناك موضوع نشط */
+.tests-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+}
+
+.test-tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.test-tab-btn.active {
+    color: var(--primary-color);
+}
+
+.test-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.test-tab-btn:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* تحسينات للكمبيوتر */
+@media (min-width: 769px) {
+    .test-tab-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 25px;
+        margin: 0 8px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .test-tab-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        transition: all 0.4s ease;
+        z-index: -1;
+    }
+
+    .test-tab-btn.active {
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(74, 108, 247, 0.3);
+    }
+
+    .test-tab-btn.active::before {
+        left: 0;
+    }
+
+    .test-tab-btn:hover:not(.active) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@media (max-width: 768px) {
+    .tests-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .test-tab-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .no-topic-message {
+        padding: 40px 20px;
+    }
+
+    .no-topic-message i {
+        font-size: 3rem;
+    }
+
+    .no-topic-message h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* رسالة الخطأ في الأسئلة */
+.error-message {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
